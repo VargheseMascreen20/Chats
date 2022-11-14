@@ -6,11 +6,28 @@
 //
 
 import SwiftUI
+import Firebase
+class FirebaseManager: NSObject{
+    let auth: Auth
+    static let shared = FirebaseManager()
+    override init(){
+        
+        FirebaseApp.configure()
+        self.auth = Auth.auth()
+        super.init()
+    }
+   
 
+}
 struct LoginView: View {
     @State var isLoginMode = false
     @State var email = ""
     @State var password = ""
+    @State var loginStatusMessage = ""
+    
+//    init(){
+//        FirebaseApp.configure()
+//    }
     var body: some View {
         NavigationView{
             ScrollView{
@@ -49,6 +66,7 @@ struct LoginView: View {
                         }.background(Color.blue)
                     }
                     Text("Creation Account Page")
+                    Text(self.loginStatusMessage).foregroundColor(.red)
                 }.padding()
                 
                 
@@ -56,13 +74,39 @@ struct LoginView: View {
             .background(Color(.init(white: 0 ,alpha:0.05)).ignoresSafeArea())
             .navigationTitle(isLoginMode ? "Login" : "Create Account")
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     private func handleAction(){
         if isLoginMode{
+            loginUser()
             print("Should Login to Firebase with Existing Credentials")
         }
         else{
+            createNewAccount()
             print("Register a new Account with firebase..")
+        }
+    }
+    private func loginUser(){
+        FirebaseManager.shared.auth.signIn(withEmail: email, password: password){
+            result ,err in
+            if let err = err{
+                print("Failed to login user",err)
+                self.loginStatusMessage  = "Failed to login user \(err)"
+                return
+            }
+            print("Successfully logged in user : \(result?.user.uid ?? "")")
+            self.loginStatusMessage  = "Successfully logged in user : \(result?.user.uid ?? "")"
+        }
+    }
+    private func createNewAccount(){
+        FirebaseManager.shared.auth.createUser(withEmail: email, password: password) { result, err in
+            if let err = err{
+                print("Failed to create user",err)
+                self.loginStatusMessage  = "Failed to create user \(err)"
+                return
+            }
+            print("Successfully created user : \(result?.user.uid ?? "")")
+            self.loginStatusMessage  = "Successfully created user : \(result?.user.uid ?? "")"
         }
     }
 }
