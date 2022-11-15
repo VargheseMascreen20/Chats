@@ -7,6 +7,8 @@
 
 import SwiftUI
 import Firebase
+import SwiftUIX
+
 class FirebaseManager: NSObject{
     let auth: Auth
     static let shared = FirebaseManager()
@@ -24,6 +26,9 @@ struct LoginView: View {
     @State var email = ""
     @State var password = ""
     @State var loginStatusMessage = ""
+    @State var shouldShowImagePicker = false
+    @State private var image = UIImage()
+    
     
 //    init(){
 //        FirebaseApp.configure()
@@ -38,9 +43,19 @@ struct LoginView: View {
                         Text("Create Account").tag(false)
                     }.pickerStyle(SegmentedPickerStyle())
                     if !isLoginMode{
-                        Button{}
+                        Button{
+                            shouldShowImagePicker.toggle()
+                        }
                     label:{
-                        Image(systemName: "person.fill").font(.system(size:64)).padding()
+                        
+                        VStack{
+                            if let image = self.image{
+                                Image(uiImage: image).resizable().frame(width: 150 , height: 150).scaledToFill().cornerRadius(150)
+                            }else{
+                                Image(systemName: "person.fill").font(.system(size:64)).padding().foregroundColor(Color(.black))
+                            }
+                        }
+                        
                     }
                         
                     }
@@ -75,7 +90,11 @@ struct LoginView: View {
             .navigationTitle(isLoginMode ? "Login" : "Create Account")
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil){
+            ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
+        }
     }
+    
     private func handleAction(){
         if isLoginMode{
             loginUser()

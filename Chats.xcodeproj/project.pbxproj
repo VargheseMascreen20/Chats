@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE913CAB292251CA00DDB1A9 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = AE913CAA292251CA00DDB1A9 /* SwiftUIX */; };
+		AE913CAD2922546F00DDB1A9 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE913CAC2922546F00DDB1A9 /* ImagePicker.swift */; };
 		AEAA87C3292218AD00ACBBE8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AEAA87C2292218AD00ACBBE8 /* GoogleService-Info.plist */; };
 		AEAB0909291CFF5B00CCE7A3 /* ChatsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAB0908291CFF5B00CCE7A3 /* ChatsApp.swift */; };
 		AEAB090B291CFF5B00CCE7A3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAB090A291CFF5B00CCE7A3 /* LoginView.swift */; };
@@ -38,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AE913CAC2922546F00DDB1A9 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		AEAA87C2292218AD00ACBBE8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AEAB0905291CFF5B00CCE7A3 /* Chats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEAB0908291CFF5B00CCE7A3 /* ChatsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsApp.swift; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 				AEADF7AA292209EA00BDD2E9 /* FirebaseAuth in Frameworks */,
 				AEADF7AC292209EA00BDD2E9 /* FirebaseFunctions in Frameworks */,
 				AEADF7AE292209EA00BDD2E9 /* FirebaseStorage in Frameworks */,
+				AE913CAB292251CA00DDB1A9 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +112,7 @@
 				AEAA87C2292218AD00ACBBE8 /* GoogleService-Info.plist */,
 				AEAB090C291CFF5D00CCE7A3 /* Assets.xcassets */,
 				AEAB090E291CFF5D00CCE7A3 /* Preview Content */,
+				AE913CAC2922546F00DDB1A9 /* ImagePicker.swift */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 				AEADF7A9292209EA00BDD2E9 /* FirebaseAuth */,
 				AEADF7AB292209EA00BDD2E9 /* FirebaseFunctions */,
 				AEADF7AD292209EA00BDD2E9 /* FirebaseStorage */,
+				AE913CAA292251CA00DDB1A9 /* SwiftUIX */,
 			);
 			productName = Chats;
 			productReference = AEAB0905291CFF5B00CCE7A3 /* Chats.app */;
@@ -239,6 +245,7 @@
 			mainGroup = AEAB08FC291CFF5B00CCE7A3;
 			packageReferences = (
 				AEADF7A8292209EA00BDD2E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AE913CA9292251C900DDB1A9 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 			);
 			productRefGroup = AEAB0906291CFF5B00CCE7A3 /* Products */;
 			projectDirPath = "";
@@ -283,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE913CAD2922546F00DDB1A9 /* ImagePicker.swift in Sources */,
 				AEAB090B291CFF5B00CCE7A3 /* LoginView.swift in Sources */,
 				AEAB0909291CFF5B00CCE7A3 /* ChatsApp.swift in Sources */,
 			);
@@ -633,6 +641,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AE913CA9292251C900DDB1A9 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
 		AEADF7A8292209EA00BDD2E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -644,6 +660,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AE913CAA292251CA00DDB1A9 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AE913CA9292251C900DDB1A9 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
 		AEADF7A9292209EA00BDD2E9 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AEADF7A8292209EA00BDD2E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

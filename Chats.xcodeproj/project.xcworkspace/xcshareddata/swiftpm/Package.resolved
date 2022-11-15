@@ -108,6 +108,15 @@
           "revision": "ab3a58b7209a17d781c0d1dbb3e1ff3da306bae8",
           "version": "1.20.3"
         }
+      },
+      {
+        "package": "SwiftUIX",
+        "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
+        "state": {
+          "branch": null,
+          "revision": "1c2ba19b91a1541b803f9d1b01b360cae5a752fa",
+          "version": "0.1.3"
+        }
       }
     ]
   },
