@@ -1,35 +1,3 @@
-//
-//  ImagePicker.swift
-//  Chats
-//
-//  Created by DDUKK7 on 14/11/22.
-//
-
-//import SwiftUI
-//
-//struct ImagePicker: UIViewControllerRepresentable{
-//
-//
-//
-//    @Binding var image: UIImage?
-//    private let controller = UIImagePickerController()
-//
-//    func makeCoordinator() -> Coordinator {
-//        return Coordinator(parent: self)
-//    }
-//
-//    class Coordinator: NSObject, UIPickerViewDelegate, UIPickerViewDataSource{
-//
-//        let parent = ImagePicker
-//
-//        init(parent: ImagePicker) {
-//            self.parent = parent
-//        }
-//
-//
-//
-//    }
-//}
 
 import SwiftUI
 
