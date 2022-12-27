@@ -6,17 +6,88 @@
 //
 
 import SwiftUI
-
+import SDWebImageSwiftUI
+struct ChatUser{
+    let uid, email, profileImageUrl: String
+}
+class MainMessageViewModel: ObservableObject{
+    @Published var errorMessage = ""
+    @Published var chatUser: ChatUser?
+    init(){
+        DispatchQueue.main.async {
+            self.isUserCurrentlyLoggedOut =  FirebaseManager.shared.auth.currentUser?.uid == nil     }
+        fetchCurrentUser()
+    }
+    
+ 
+    
+    func fetchCurrentUser(){
+        guard let uid =
+                FirebaseManager.shared.auth.currentUser?.uid else{
+            self.errorMessage = "Could not find Firebase UID"
+            return
+            
+        }
+        FirebaseManager.shared.firestore.collection("users").document(uid).getDocument{ snapshot, error in
+            if let error = error{
+                self.errorMessage = "Failed to fetch current user: \(error)"
+                print("Failed to fetch current user: ", error)
+                return
+            }
+            guard let data = snapshot?.data() else {
+                self.errorMessage = "No Data Found"
+                return}
+            
+            let uid = data["uid"] as? String ?? ""
+            let email = data["email"] as? String ?? ""
+            let profileImageUrl = data["profileImageUrl"] as? String ?? ""
+            self.chatUser = ChatUser(uid: uid, email: email, profileImageUrl: profileImageUrl)
+        }
+    }
+    
+    @Published var isUserCurrentlyLoggedOut = false
+    
+    func handleSignOut(){
+        isUserCurrentlyLoggedOut.toggle()
+        try? FirebaseManager.shared.auth.signOut()
+    }
+}
 struct MainMessagesView: View {
     @State var shouldShowLogOutOptions = false
+    @ObservedObject private var vm = MainMessageViewModel()
+    var body: some View {
+        NavigationView{
+            VStack {
+//                Text("User : \(vm.chatUser?.uid ?? "")")
+                customNavBar
+                messagesView
+                
+                
+            }
+            .overlay(
+                newMessageButton,alignment: .bottom)
+            .navigationBarHidden(true)
+            
+        }
+    }
+    
     private var customNavBar: some View {
         HStack(spacing:16){
             
-            Image(systemName: "person.fill")
-                .font(.system(size: 34, weight: .heavy))
-            
+            WebImage(url: URL(string: vm.chatUser?.profileImageUrl ?? "")).resizable()
+                .scaledToFill()
+                .frame(width:50 , height: 50)
+                .clipped()
+                .cornerRadius(50)
+                .overlay(RoundedRectangle(cornerRadius: 44)
+                .stroke(Color(.label), lineWidth: 1))
+                .shadow(radius: 5)
+
             VStack(alignment: .leading, spacing: 4){
-                Text("USERNAME")
+                
+                let name = vm.chatUser?.email.replacingOccurrences(of: "@gmail.com", with: "") ?? ""
+                
+                Text(name)
                     .font(.system(size: 24.0,weight: .bold))
                 HStack {
                     Circle()
@@ -28,7 +99,9 @@ struct MainMessagesView: View {
                 }
                 
             }
+            
             Spacer()
+            
             Button{
                 shouldShowLogOutOptions.toggle()
             }label: {
@@ -39,29 +112,21 @@ struct MainMessagesView: View {
         }.padding()
             .actionSheet(isPresented: $shouldShowLogOutOptions){
                 .init(title: Text("Settings"),message: Text("What do you want to do?"), buttons: [
-//                            .default(Text("DEFAULT BUTTON")),
+                    //                            .default(Text("DEFAULT BUTTON")),
                     .destructive(Text("Sign Out"),action: {
                         print("Handle Sign Out")
+                        vm.handleSignOut()
                     }),
                     .cancel()
                 ])
             }
-
-    }
-    var body: some View {
-        NavigationView{
-            VStack {
-                
-                customNavBar
-                messagesView
-
-                
+            .fullScreenCover(isPresented:  $vm.isUserCurrentlyLoggedOut,onDismiss: nil){
+                LoginView(didCompleteLoginProcess: {
+                    self.vm.isUserCurrentlyLoggedOut = false
+                    self.vm.fetchCurrentUser()
+                })
             }
-            .overlay(
-                newMessageButton,alignment: .bottom)
-            .navigationBarHidden(true)
-            
-        }
+        
     }
     private var messagesView: some View{
         ScrollView{
@@ -98,23 +163,23 @@ struct MainMessagesView: View {
         Button{
             
         }
-        label:{
-            HStack {
-                Spacer()
-                Text("+ New Message")
-                    .font(.system(size: 16, weight: .bold))
-                Spacer()
-                
-            }
-            .foregroundColor(Color.white)
-            .padding(.vertical)
-            .background(Color.blue)
-            .cornerRadius(32)
-            .padding(.horizontal)
-            .shadow(radius: 5)
-            
+    label:{
+        HStack {
+            Spacer()
+            Text("+ New Message")
+                .font(.system(size: 16, weight: .bold))
+            Spacer()
             
         }
+        .foregroundColor(Color.white)
+        .padding(.vertical)
+        .background(Color.blue)
+        .cornerRadius(32)
+        .padding(.horizontal)
+        .shadow(radius: 5)
+        
+        
+    }
     }
     
     struct MainMessagesView_Previews: PreviewProvider {
