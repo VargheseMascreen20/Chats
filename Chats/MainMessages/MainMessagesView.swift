@@ -7,9 +7,6 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
-struct ChatUser{
-    let uid, email, profileImageUrl: String
-}
 class MainMessageViewModel: ObservableObject{
     @Published var errorMessage = ""
     @Published var chatUser: ChatUser?
@@ -38,10 +35,7 @@ class MainMessageViewModel: ObservableObject{
                 self.errorMessage = "No Data Found"
                 return}
             
-            let uid = data["uid"] as? String ?? ""
-            let email = data["email"] as? String ?? ""
-            let profileImageUrl = data["profileImageUrl"] as? String ?? ""
-            self.chatUser = ChatUser(uid: uid, email: email, profileImageUrl: profileImageUrl)
+            self.chatUser = .init(data: data)
         }
     }
     
@@ -159,9 +153,11 @@ struct MainMessagesView: View {
             
         }
     }
+    
+    @State var shouldShowNewMessageScreen = false
     private var newMessageButton: some View{
         Button{
-            
+            shouldShowNewMessageScreen.toggle()
         }
     label:{
         HStack {
@@ -179,6 +175,8 @@ struct MainMessagesView: View {
         .shadow(radius: 5)
         
         
+    }.fullScreenCover(isPresented: $shouldShowNewMessageScreen){
+        CreateNewMessageView()
     }
     }
     

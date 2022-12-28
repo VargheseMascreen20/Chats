@@ -10,6 +10,8 @@
 		3764069A295988B90070BC0B /* MainMessagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37640699295988B90070BC0B /* MainMessagesView.swift */; };
 		3764069D2959BA4B0070BC0B /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3764069C2959BA4B0070BC0B /* FirebaseManager.swift */; };
 		376406A0295AFE190070BC0B /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3764069F295AFE190070BC0B /* SDWebImageSwiftUI */; };
+		376406A3295B97010070BC0B /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376406A2295B97010070BC0B /* ChatUser.swift */; };
+		376406A6295B9C8B0070BC0B /* CreateNewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376406A5295B9C8B0070BC0B /* CreateNewMessageView.swift */; };
 		3796B30E2951F037002C3766 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3796B30D2951F037002C3766 /* GoogleService-Info.plist */; };
 		AE16E1772946FA7C001942F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AE16E1762946FA7C001942F4 /* FirebaseAuth */; };
 		AE16E1792946FA7C001942F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AE16E1782946FA7C001942F4 /* FirebaseFirestore */; };
@@ -43,6 +45,8 @@
 		37640697295988570070BC0B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		37640699295988B90070BC0B /* MainMessagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesView.swift; sourceTree = "<group>"; };
 		3764069C2959BA4B0070BC0B /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		376406A2295B97010070BC0B /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
+		376406A5295B9C8B0070BC0B /* CreateNewMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMessageView.swift; sourceTree = "<group>"; };
 		3796B30D2951F037002C3766 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AE913CAC2922546F00DDB1A9 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		AEAB0905291CFF5B00CCE7A3 /* Chats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chats.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +91,7 @@
 		376406982959887A0070BC0B /* MainMessages */ = {
 			isa = PBXGroup;
 			children = (
+				376406A4295B9C5F0070BC0B /* NewMessage */,
 				37640699295988B90070BC0B /* MainMessagesView.swift */,
 			);
 			path = MainMessages;
@@ -103,8 +108,17 @@
 		376406A1295B13360070BC0B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				376406A2295B97010070BC0B /* ChatUser.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		376406A4295B9C5F0070BC0B /* NewMessage */ = {
+			isa = PBXGroup;
+			children = (
+				376406A5295B9C8B0070BC0B /* CreateNewMessageView.swift */,
+			);
+			path = NewMessage;
 			sourceTree = "<group>";
 		};
 		AEAB08FC291CFF5B00CCE7A3 = {
@@ -301,7 +315,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				376406A3295B97010070BC0B /* ChatUser.swift in Sources */,
 				AE913CAD2922546F00DDB1A9 /* ImagePicker.swift in Sources */,
+				376406A6295B9C8B0070BC0B /* CreateNewMessageView.swift in Sources */,
 				3764069A295988B90070BC0B /* MainMessagesView.swift in Sources */,
 				3764069D2959BA4B0070BC0B /* FirebaseManager.swift in Sources */,
 				AEAB090B291CFF5B00CCE7A3 /* LoginView.swift in Sources */,
