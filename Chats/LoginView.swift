@@ -113,6 +113,7 @@ struct LoginView: View {
             self.loginStatusMessage  = "Successfully logged in user : \(result?.user.uid ?? "")"
              
             self.didCompleteLoginProcess()
+            self.navigateToMainMessageView()
         }
     }
     private func createNewAccount(){
@@ -155,6 +156,11 @@ struct LoginView: View {
                 self.storeUserInformation(imageProfileUrl: url)
             }
         }
+    }
+    func navigateToMainMessageView() {
+        // Navigate to the home view
+        let homeView = MainMessagesView()
+        UIApplication.shared.windows.first?.rootViewController = UIHostingController(rootView: homeView)
     }
     private func storeUserInformation(imageProfileUrl: URL){
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else{
